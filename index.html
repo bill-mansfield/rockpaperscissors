@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+</head>
+<body>
+  <script>
+    function computerPlay() {
+        var outcomes = ["rock", "paper", "scissors"];
+        return outcomes[Math.floor(Math.random() * Math.floor(3))];
+    }
+
+    function RPS(playerSelection) {
+        var computerSelection = computerPlay();
+        var winner = "";
+        var playerWin = "You Win!";
+        var computerWin = "You Lose!";
+        var tie = "Tie!";
+
+        playerSelection = playerSelection.toLowerCase();
+
+        if (playerSelection === "rock" && computerSelection === "paper") {
+            winner = computerWin;
+        }
+        if (playerSelection === "rock" && computerSelection === "scissors") {
+            winner = playerWin;
+        }
+        if (playerSelection === "rock" && computerSelection === "rock") {
+            winner = tie;
+        }
+        if (playerSelection === "paper" && computerSelection === "paper") {
+            winner = tie;
+        }
+        if (playerSelection === "paper" && computerSelection === "scissors") {
+            winner = computerWin;
+        }
+        if (playerSelection === "paper" && computerSelection === "rock") {
+            winner = playerWin;
+        }
+        if (playerSelection === "scissors" && computerSelection === "paper") {
+            winner = playerWin;
+        }
+        if (playerSelection === "scissors" && computerSelection === "scissors") {
+            winner = tie;
+        }
+        if (playerSelection === "scissors" && computerSelection === "rock") {
+            winner = computerWin;
+        }
+
+        return winner;
+      }
+
+      console.log(RPS("scissors"));
+  </script>
+</body>
+</html>
+

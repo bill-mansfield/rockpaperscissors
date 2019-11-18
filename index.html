@@ -11,37 +11,39 @@
     <h2>Computer: <span id="computerscore"></span></h2>
 
   <script>
-    function computerPlay() {
-        var outcomes = ["rock", "paper", "scissors"];
-        return outcomes[Math.floor(Math.random() * Math.floor(3))];
-    }
+
+    //variables
+    var playerScore = 0;
+    var computerScore = 0;
+    var outcomes = ["rock", "paper", "scissors"];
+    var winner = "";
+    var playerWin = "You Win!";
+    var computerWin = "You Lose!";
+    var tie = "Tie!";
 
     function game() {
         var playerInput = prompt("Rock..Paper..Scissors...");
         var outcome = RPS(playerInput);
-        var playerScore = 0;
-        var computerScore = 0;
         
         document.getElementById("results").innerHTML = outcome;
 
-        if (outcome = "You Win!") {
-            playerscore++;
+        if (outcome === "You Win!") {
+            playerScore++;
+            document.getElementById("playerscore").innerHTML = playerScore;
         }
 
-        if (outcome = "You Lose!") {
+        if (outcome === "You Lose!") {
             computerScore++;
+            document.getElementById("computerscore").innerHTML = computerScore;
         }
+    }
 
-        document.getElementById("playerscore").innerHTML = playerScore;
-        document.getElementById("computerscore").innerHTML = computerScore;
-        }
+    function computerPlay() {
+        return outcomes[Math.floor(Math.random() * Math.floor(3))];
+    }
 
     function RPS(playerSelection) {
         var computerSelection = computerPlay();
-        var winner = "";
-        var playerWin = "You Win!";
-        var computerWin = "You Lose!";
-        var tie = "Tie!";
 
         playerSelection = playerSelection.toLowerCase();
 

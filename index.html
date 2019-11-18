@@ -4,6 +4,10 @@
   <title>Page Title</title>
 </head>
 <body>
+
+    <button onclick="letsPlay()">Play</button>
+    <h1 id="results"></h1>
+
   <script>
     function computerPlay() {
         var outcomes = ["rock", "paper", "scissors"];
@@ -50,7 +54,12 @@
         return winner;
       }
 
-      console.log(RPS("scissors"));
+      function letsPlay() {
+          var playerInput = prompt("Rock..Paper..Scissors...");
+          document.getElementById("results").innerHTML = RPS(playerInput);
+      }
+
+      console.log(RPS("rock"));
   </script>
 </body>
 </html>

@@ -6,9 +6,9 @@
 <body>
 
     <button onclick="game()">Play</button>
-    <h1 id="results"></h1>
+    <h1>Round outcome: <span id="results"></span></h1>
     <h2>Your score: <span id="playerscore"></span></h2>
-    <h2>Computer: <span id="computerscore"></span></h2>
+    <h2>Computer score: <span id="computerscore"></span></h2>
 
   <script>
 
@@ -21,6 +21,12 @@
     var computerWin = "You Lose!";
     var tie = "Tie!";
 
+    /* 
+    Take player imput via prompt
+    Display outcome from RPS function to show who won round
+    Tally score
+    Firsy to reach a score of 5 is displayed as the winner via an alert()
+    */
     function game() {
         var playerInput = prompt("Rock..Paper..Scissors...");
         var outcome = RPS(playerInput);
@@ -44,10 +50,12 @@
         }
     }
 
+    // Computer chooses random select of Rock, Paper or Scissors
     function computerPlay() {
         return outcomes[Math.floor(Math.random() * Math.floor(3))];
     }
 
+    // Determin winner and return outcome
     function RPS(playerSelection) {
         var computerSelection = computerPlay();
 

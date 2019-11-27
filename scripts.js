@@ -8,11 +8,19 @@ var playerWin = "You Win!";
 var computerWin = "You Lose!";
 var tie = "Tie!";
 
-const container = document.querySelector("#container");
+const optionsFront = document.querySelector("#options");
+const container = document.querySelector("#play");
+const scoreBoard = document.querySelector("#scoreboard");
+const input = document.querySelector("#input");
 const initBtn = document.getElementById("init")
 const options = ["rock", "paper", "scissors"];
+const h1 = document.createElement("h1");
+const h2 = document.createElement("h2");
 const h3 = document.createElement("h3");
+const body = document.querySelector("#body");
 
+
+//Loop through options create buttons and event function for each option that plays game (game());
 function createBtns(arr) {
     arr.forEach(element => {
         var i = document.createElement("button");
@@ -20,12 +28,26 @@ function createBtns(arr) {
         i.addEventListener("click", function(e) {
             game(element);
         })
-        container.appendChild(i);
+        optionsFront.appendChild(i);
     });
 }
 
+//Begin game: create buttons, hide play button and add scoreboard to dom
 function init() {
+
+    var ps = document.createElement("h2");
+    var cs = document.createElement("h2");
+
     createBtns(options);
+    container.classList.add("hidden");
+
+    ps.textContent = "Your score: ";
+    ps.setAttribute("id", "playerscore");
+    scoreBoard.appendChild(ps);
+
+    cs.textContent = "Computer score: ";
+    cs.setAttribute("id", "computerscore");
+    scoreBoard.appendChild(cs);
 }
 
 /* 
@@ -37,28 +59,39 @@ First to reach a score of 5 is displayed as the winner via an alert()
 function game(playerInput) {
     var computerSelection = computerPlay();
     var outcome = RPS(playerInput, computerSelection);
+    var playerScoreNode = document.getElementById("playerscore");
+    var computerScoreNode = document.getElementById("computerscore");
 
-    h3.textContent = "You played: " + playerInput + ":&nbsp" + "Computer played: " + computerSelection;
-    container.appendChild(h3);
+    h1.textContent = outcome;
+    input.appendChild(h1);
 
+    h3.textContent = "You played: " + playerInput + " Computer played: " + computerSelection;
+    input.appendChild(h3);
 
-    
-
-    document.getElementById("results").innerHTML = outcome;
 
     if (outcome === "You Win!") {
         playerScore++;
-        document.getElementById("playerscore").innerHTML = playerScore;
+        playerScoreNode.textContent += "|";
         if (playerScore >= 5) {
-            alert("Player wins!");
+            document.querySelector("#junk").classList.add("hidden");
+            h1.textContent = playerWin;
+            body.appendChild(h1);
+            setTimeout(function(){
+                window.location.reload(false); 
+            },1500);
         }
     }
 
     if (outcome === "You Lose!") {
         computerScore++;
-        document.getElementById("computerscore").innerHTML = computerScore;
+        computerScoreNode.textContent += "|";
         if (computerScore >= 5) {
-            alert("Computer wins!");
+            document.querySelector("#junk").classList.add("hidden");
+            h1.textContent = computerWin
+            body.appendChild(h1);
+            setTimeout(function(){
+                window.location.reload(false); 
+            },1500);
         }
     }
 }
@@ -68,7 +101,7 @@ function computerPlay() {
     return outcomes[Math.floor(Math.random() * Math.floor(3))];
 }
 
-// Determin winner and return outcome
+// Determine winner and return outcome
 function RPS(playerSelection, computerSelection) {
 
     if (playerSelection === "rock" && computerSelection === "paper") {
